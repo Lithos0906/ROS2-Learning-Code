@@ -13,6 +13,7 @@ find_package(rclcpp REQUIRED)    # find the head files and library files
 # find_package(<dependency> REQUIRED)
 
 add_executable(cpp_node src/cpp_node.cpp)
+add_executable(person_node src/person_node.cpp)
 
 # message(STSTUS ${rclcpp_INCLUDE_DIRS})    # head-files and head-files rclcpp depends on
 # message(STSTUS ${rclcpp_LIBRARIES})    # library-files and library-files rclcpp depends on
@@ -21,8 +22,9 @@ add_executable(cpp_node src/cpp_node.cpp)
 # target_link_libraries(cpp_node ${rclcpp_LIBRARIES})    # library-files linked
 
 ament_target_dependencies(cpp_node rclcpp)
+ament_target_dependencies(person_node rclcpp)
 
-install(TARGETS cpp_node
+install(TARGETS cpp_node person_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
