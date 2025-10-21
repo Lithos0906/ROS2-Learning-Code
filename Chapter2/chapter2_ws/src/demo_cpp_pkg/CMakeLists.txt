@@ -11,6 +11,7 @@ find_package(rclcpp REQUIRED)    # find the head files and library files
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+include_directories(include)
 
 add_executable(cpp_node src/cpp_node.cpp)
 add_executable(person_node src/person_node.cpp)
@@ -18,6 +19,7 @@ add_executable(learn_auto src/learn_auto.cpp)
 add_executable(learn_sharepointer src/learn_sharepointer.cpp)
 add_executable(learn_lambda src/learn_lambda.cpp)
 add_executable(learn_function src/learn_function.cpp)
+add_executable(learn_thread src/learn_thread.cpp)
 
 # message(STSTUS ${rclcpp_INCLUDE_DIRS})    # head-files and head-files rclcpp depends on
 # message(STSTUS ${rclcpp_LIBRARIES})    # library-files and library-files rclcpp depends on
@@ -31,9 +33,10 @@ ament_target_dependencies(learn_auto rclcpp)
 ament_target_dependencies(learn_sharepointer rclcpp)
 ament_target_dependencies(learn_lambda rclcpp)
 ament_target_dependencies(learn_function rclcpp)
+ament_target_dependencies(learn_thread rclcpp)
 
 
-install(TARGETS cpp_node person_node learn_auto learn_sharepointer learn_lambda
+install(TARGETS cpp_node person_node learn_auto learn_sharepointer learn_lambda learn_thread
   DESTINATION lib/${PROJECT_NAME}
 )
 
