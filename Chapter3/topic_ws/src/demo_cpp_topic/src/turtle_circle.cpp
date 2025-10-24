@@ -13,7 +13,7 @@ private:
 public:
     explicit TurtleCircleNode(const std::string& node_name): Node(node_name)
     {
-        publisher_ = this -> create_publisher<geometry_msgs::msg::Twist>("turtle1/cmd_vel", 10);
+        publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("turtle1/cmd_vel", 10);
         timer_ = this->create_wall_timer(1000ms, std::bind(&TurtleCircleNode::timer_callback, this));
     }
 
