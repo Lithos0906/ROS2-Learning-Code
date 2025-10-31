@@ -28,11 +28,14 @@ class FaceDetectClientNode(Node):
         future = self.client.call_async(request)
         # while not future.done():
         #     time.sleep(1.0)    # the current thread will be put to sleep, waiting for the service to complete
-        rclpy.spin_until_future_complete(self, future)    # waiting for the service to complete
-        response = future.result()    # obtain response
-        self.get_logger().info(f'receive the response, {response.number} faces was detected, time consuming {response.use_time}s')
-        self.show_response(response)
+        # rclpy.spin_until_future_complete(self, future)    # waiting for the service to complete
+        def result_callback(result_future):
+            response = result_future.result()    # obtain response
+            self.get_logger().info(f'receive the response, {response.number} faces was detected, time consuming {response.use_time}s')
+            self.show_response(response)
 
+        future.add_done_callback(result_callback)
+        
     def show_response(self, response):
         for i in range(response.number):
             top = response.top[i]
