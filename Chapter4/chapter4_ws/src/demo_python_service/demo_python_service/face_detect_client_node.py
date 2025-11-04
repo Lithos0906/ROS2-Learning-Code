@@ -21,9 +21,11 @@ class FaceDetectClientNode(Node):
         # 1.determine if the server is online
         while self.client.wait_for_service(timeout_sec=1.0) is False:
             self.get_logger().info('waiting for the server to go online')
+
         # 2.structure Request
         request = FaceDetector.Request()
         request.image = self.bridge.cv2_to_imgmsg(self.image)
+        
         # 3. send a request and wait for processing to complete
         future = self.client.call_async(request)
         # while not future.done():
