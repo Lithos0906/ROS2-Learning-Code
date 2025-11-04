@@ -30,7 +30,6 @@ class PartolClient(Node):
                 self.get_logger().info('Requesting patrol target point successful')
             if response.result==Partol.Response.FAIL:
                 self.get_logger().info('Requesting patrol target point fail')
-            # self.show_response(response)
 
         future.add_done_callback(result_callback)
 
