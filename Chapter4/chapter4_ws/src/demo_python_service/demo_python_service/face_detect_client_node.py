@@ -88,8 +88,8 @@ class FaceDetectClientNode(Node):
 def main():
     rclpy.init()
     node = FaceDetectClientNode()
-    # node.update_detect_model('hog')
-    # node.send_request()
+    node.update_detect_model('hog')
+    node.send_request()
     node.update_detect_model('cnn')
     node.send_request()
     rclpy.spin(node)
