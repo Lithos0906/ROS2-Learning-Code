@@ -7,6 +7,8 @@ from ament_index_python.packages import get_package_share_directory
 import os
 from cv_bridge import CvBridge
 import time
+from rcl_interfaces.srv import SetParameters
+from rcl_interfaces.msg import Parameter, ParameterValue, ParameterType
 
 class FaceDetectClientNode(Node):
     def __init__(self):
@@ -16,6 +18,39 @@ class FaceDetectClientNode(Node):
         self.friends_image_path = os.path.join(get_package_share_directory('demo_python_service'), 'resource/friends.jpg')
         self.get_logger().info(f"face detect client has been launched.")
         self.image = cv2.imread(self.friends_image_path)
+
+    def call_set_parameters(self, parameters):
+        # 1.creating a client, wait for the service to go online
+        update_param_client = self.create_client(SetParameters, '/face_detect_node/set_parameters')
+        while update_param_client.wait_for_service(timeout_sec=1.0) is False:
+            self.get_logger().info('waiting for the params update server to go online')
+
+        # 2.structure request
+        request = SetParameters.Request()
+        request.parameters = parameters
+
+        # 3.call the server to update parameters
+        future = update_param_client.call_async(request)
+        rclpy.spin_until_future_complete(self, future)    # waiting for the service to complete
+        response = future.result()    # obtain response
+        return response
+
+    def update_detect_model(self, model='hog'):
+        # 1.create a param orient
+        param = Parameter()
+        param.name = 'model'
+
+        # 2.cope values
+        param_value = ParameterValue()
+        param_value.string_value = model
+        param_value.type = ParameterType.PARAMETER_STRING
+        param.value = param_value
+
+        # 3.request to update params
+        response = self.call_set_parameters([param])
+        for result in response.results:
+            if result.successful:
+                self.get_logger().info(f"set the result of params: {result.successful} {result.reason}")
 
     def send_request(self):
         # 1.determine if the server is online
@@ -34,7 +69,7 @@ class FaceDetectClientNode(Node):
         def result_callback(result_future):
             response = result_future.result()    # obtain response
             self.get_logger().info(f'receive the response, {response.number} faces was detected, time consuming {response.use_time}s')
-            self.show_response(response)
+            # self.show_response(response)
 
         future.add_done_callback(result_callback)
         
@@ -53,6 +88,9 @@ class FaceDetectClientNode(Node):
 def main():
     rclpy.init()
     node = FaceDetectClientNode()
+    # node.update_detect_model('hog')
+    # node.send_request()
+    node.update_detect_model('cnn')
     node.send_request()
     rclpy.spin(node)
     rclpy.shutdown()
