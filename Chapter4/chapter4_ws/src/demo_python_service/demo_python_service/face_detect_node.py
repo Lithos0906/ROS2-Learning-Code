@@ -21,6 +21,8 @@ class FaceDetectNode(Node):
         self.default_image_path = os.path.join(get_package_share_directory('demo_python_service'), 'resource/default.jpg')
         self.get_logger().info(f"face detect service has been launched.")
         self.add_on_set_parameters_callback(self.parameters_callback)
+        # Methods for setting parameters of its own node.
+        self.set_parameters([rclpy.Parameter('model', rclpy.Parameter.Type.STRING)])
 
     def parameters_callback(self, parameters):
         for parameter in parameters:
