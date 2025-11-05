@@ -19,6 +19,11 @@ private:
 public:
     explicit TurtleController(const std::string& node_name): Node(node_name)
     {
+        this->declare_parameter("k", 1.0);
+        this->declare_parameter("max_speed", 1.0);
+        this->get_parameter("k", k_);
+        this->get_parameter("max_speed", max_speed_);
+
         partol_service_ = this->create_service<Partol>("partol", [&](const Partol::Request::SharedPtr request, Partol::Response::SharedPtr response) -> void{
             if((0<request->target_x && request->target_x<12.0f) && (0<request->target_y && request->target_y<12.0f))
             {
