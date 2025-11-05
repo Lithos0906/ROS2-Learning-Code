@@ -22,7 +22,7 @@ class FaceDetectNode(Node):
         self.get_logger().info(f"face detect service has been launched.")
         self.add_on_set_parameters_callback(self.parameters_callback)
         # Methods for setting parameters of its own node.
-        self.set_parameters([rclpy.Parameter('model', rclpy.Parameter.Type.STRING)])
+        # self.set_parameters([rclpy.Parameter('model', rclpy.Parameter.Type.STRING, 'hog')])
 
     def parameters_callback(self, parameters):
         for parameter in parameters:
