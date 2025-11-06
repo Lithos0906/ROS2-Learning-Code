@@ -4,7 +4,7 @@ import launch_ros
 def generate_launch_description():
     # 1.declare a launch param
     action_declare_arg_background_g = launch.actions.DeclareLaunchArgument('launch_arg_bg', default_value="150")
-    action_declare_arg_max_speed = launch.actions.DeclareLaunchArgument('launch_arg_ms', default_value="1.0")
+    # action_declare_arg_max_speed = launch.actions.DeclareLaunchArgument('launch_arg_ms', default_value="1.0")
 
     # 2.manually pass the launch parameter to a node
     # generate the description of launch
@@ -19,7 +19,7 @@ def generate_launch_description():
     action_node_turtle_control = launch_ros.actions.Node(
         package = 'demo_cpp_service',
         executable = 'turtle_control',
-        parameters=[{'max_speed': launch.substitutions.LaunchConfiguration('launch_arg_ms', default="1.0")}],
+        # parameters=[{'max_speed': launch.substitutions.LaunchConfiguration('launch_arg_ms', default="1.0")}],
         output = 'both'
     )
 
