@@ -13,7 +13,7 @@ class TFListener(Node):
     def get_transform(self):
         # real-time query relations of coordinates buffer_
         try:
-            result = self.buffer_.lookup_transform('base_link', 'bottle_link', rclpy.time.Time(seconds=0), rclpy.time.Time(1.0))
+            result = self.buffer_.lookup_transform('base_link', 'bottle_link', rclpy.time.Time(seconds=0), rclpy.time.Duration(seconds=1.0))
             transform = result.transform
             self.get_logger().info(f"Translation: {transform.translation}")
             self.get_logger().info(f"Rotation: {transform.rotation}")
