@@ -2,7 +2,7 @@
 #include "geometry_msgs/msg/transform_stamped.hpp" // supply message interface
 #include "tf2/LinearMath/Quaternion.h" // supply tf2::Quaternion class
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp" // message type transfer function
-#include "tf2_ros/transform_broadcaster.h"  // static coordinate broadcaster class
+#include "tf2_ros/transform_broadcaster.h"  // coordinate broadcaster class
 #include "chrono"
 
 using namespace std::chrono_literals;
