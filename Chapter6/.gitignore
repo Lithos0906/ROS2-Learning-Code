@@ -1,1 +1,4 @@
 include
+build
+install
+log
