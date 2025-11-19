@@ -15,7 +15,7 @@ def generate_launch_description():
     # the content is obtained from the file path
     # and converted into a parameter value object
     # to be passed to robot_state_publisher
-    substitutions_command_result = launch.substitutions.Command(['cat ', launch.substitutions.LaunchConfiguration('model')])
+    substitutions_command_result = launch.substitutions.Command(['xacro ', launch.substitutions.LaunchConfiguration('model')])
     robot_description_value = launch_ros.parameter_descriptions.ParameterValue(substitutions_command_result, value_type=str)
 
     action_robot_state_publisher = launch_ros.actions.Node(
