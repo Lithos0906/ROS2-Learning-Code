@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <link name="base_footprint" />
+    <xacro:include filename="$(find fishbot_description)/urdf/fishbot/common_inertia.xacro"/>
+
 
     <!-- base module -->
     <xacro:macro name="base_xacro" params="length radius">
+        <link name="base_footprint" />
+
         <!-- Body Part of Robot -->
         <link name="base_link">
             <!-- component appearance description -->
@@ -33,6 +36,8 @@
                     <color rgba="1.0 1.0 1.0 0.5"/>
                 </material>
             </collision>
+
+            <xacro:cylinder_inertia m="1.0" r="${radius}" h="${length}" />
         </link>
 
         <joint name="joint_name" type="fixed">
