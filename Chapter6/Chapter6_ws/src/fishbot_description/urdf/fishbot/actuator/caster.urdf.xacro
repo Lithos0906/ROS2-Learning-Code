@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="caster_xacro" params="caster_name xyz">
+        <!-- robot's CASTER component -->
+        <link name="${caster_name}_link">
+            <!-- component appearance description -->
+            <visual>
+                <!-- values of offset and rotation along its own geometric center -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- geometric shapes -->
+                <geometry>
+                    <sphere radius="0.016"/>
+                </geometry>
+                <!-- material -->
+                <material name="yellow">
+                    <color rgba="1.0 1.0 0.0 0.8"/>
+                </material>
+            </visual>
+        </link>
+
+        <!-- robot's joints, for assembling components of robot -->
+        <joint name="${caster_name}_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="${caster_name}_link"/>
+            <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

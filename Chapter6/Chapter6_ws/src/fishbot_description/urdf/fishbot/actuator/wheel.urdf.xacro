@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="wheel_xacro" params="wheel_name xyz">
+        <!-- robot's WHEEL component -->
+        <link name="${wheel_name}_link">
+            <!-- component appearance description -->
+            <visual>
+                <!-- values of offset and rotation along its own geometric center -->
+                <origin xyz="0.0 0.0 0.0" rpy="1.57079 0.0 0.0"/>
+                <!-- geometric shapes -->
+                <geometry>
+                    <cylinder radius="0.032" length="0.04"/>
+                </geometry>
+                <!-- material -->
+                <material name="yellow">
+                    <color rgba="1.0 1.0 0.0 0.8"/>
+                </material>
+            </visual>
+        </link>
+
+        <!-- robot's joints, for assembling components of robot -->
+        <joint name="${wheel_name}_joint" type="continuous">
+            <parent link="base_link"/>
+            <child link="${wheel_name}_link"/>
+            <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+    </xacro:macro>
+
+</robot>
