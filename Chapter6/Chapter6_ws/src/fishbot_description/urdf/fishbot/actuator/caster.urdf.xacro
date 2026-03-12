@@ -16,6 +16,18 @@
                     <color rgba="1.0 1.0 0.0 0.8"/>
                 </material>
             </visual>
+            <collision>
+                <!-- values of offset and rotation along its own geometric center -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- geometric shapes -->
+                <geometry>
+                    <sphere radius="0.016"/>
+                </geometry>
+                <!-- material -->
+                <material name="yellow">
+                    <color rgba="1.0 1.0 0.0 0.8"/>
+                </material>
+            </collision>
         </link>
 
         <!-- robot's joints, for assembling components of robot -->

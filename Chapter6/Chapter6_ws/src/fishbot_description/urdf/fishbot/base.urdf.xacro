@@ -20,6 +20,19 @@
                     <color rgba="1.0 1.0 1.0 0.5"/>
                 </material>
             </visual>
+            <collision>
+                <!-- values of offset and rotation along its own geometric center -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- geometric shapes -->
+                <geometry>
+                    <!-- cylinder 0.10m*0.12m -->
+                    <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+                <!-- material -->
+                <material name="white">
+                    <color rgba="1.0 1.0 1.0 0.5"/>
+                </material>
+            </collision>
         </link>
 
         <joint name="joint_name" type="fixed">
