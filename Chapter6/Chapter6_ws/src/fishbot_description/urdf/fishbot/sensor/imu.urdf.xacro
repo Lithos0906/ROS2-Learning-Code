@@ -39,6 +39,11 @@
             <child link="imu_link"/>
             <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
         </joint>
+
+        <gazebo reference="imu_link">
+            <material> Gazebo/Black </material>
+        </gazebo>
+
     </xacro:macro>
 
 </robot>
