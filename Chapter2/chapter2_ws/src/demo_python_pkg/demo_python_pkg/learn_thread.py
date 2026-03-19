@@ -9,6 +9,7 @@ class Download:
         callback_word_count(url, response.text)
 
     def start_download(self, url, callback_word_count):
+        # 创建线程, target指定线程函数, args指定线程函数的参数
         thread = threading.Thread(target=self.download, args=(url, callback_word_count))
         thread.start()
 
